@@ -79,14 +79,7 @@ CREATE TABLE employees(
     nationality 		 NATIONAL CHARACTER VARYING,
     military_services     NATIONAL CHARACTER VARYING,
     marital_status       NATIONAL CHARACTER VARYING,
-   
     /* Sawanih Mamorin*/
-    promotion           NATIONAL CHARACTER VARYING,
-    promotion_date       DATE,
-    promotion_achivement NATIONAL CHARACTER VARYING,
-    panishment_date      NATIONAL CHARACTER VARYING,
-    panishment_detailes  NATIONAL CHARACTER VARYING,
-    publish             NATIONAL CHARACTER VARYING,
     before_jobs          NATIONAL CHARACTER VARYING,
     health_reports       NATIONAL CHARACTER VARYING,
 	attachment    		BYTEA
@@ -198,7 +191,7 @@ CREATE TABLE emp_steps(
 
 CREATE TABLE emp_ranks(
     /* Qadam*/
-	rank_id		SERIAL PRIMARY KEY,
+	rank_id			SERIAL PRIMARY KEY,
 	emp_fk_id				SERIAL,
     rank_title          NATIONAL CHARACTER VARYING,
     rank_date      DATE,
@@ -250,5 +243,3 @@ CREATE TABLE evaluations(
 	REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-
