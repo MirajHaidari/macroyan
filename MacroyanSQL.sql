@@ -19,6 +19,7 @@ CREATE TABLE positions(
 	department_fk_id 	SERIAL,
 	position_name 	NATIONAL CHARACTER VARYING,
     position_desc    NATIONAL CHARACTER VARYING,
+	position_status    NATIONAL CHARACTER VARYING,
 	CONSTRAINT pos_department FOREIGN KEY(department_fk_id) REFERENCES departments (dep_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
