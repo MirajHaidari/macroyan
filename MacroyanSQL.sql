@@ -19,7 +19,8 @@ CREATE TABLE positions(
 	department_fk_id 	SERIAL,
 	position_name 	NATIONAL CHARACTER VARYING,
     position_desc    NATIONAL CHARACTER VARYING,
-	position_status    NATIONAL CHARACTER VARYING,
+    position_status    NATIONAL CHARACTER VARYING,
+	
 	CONSTRAINT pos_department FOREIGN KEY(department_fk_id) REFERENCES departments (dep_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -47,42 +48,32 @@ CREATE TABLE job_respons(
 
 
 CREATE TABLE employees(
-	emp_id		SERIAL PRIMARY KEY,
-	first_name		NATIONAL CHARACTER VARYING,
-	last_name		NATIONAL CHARACTER VARYING,
+	emp_id				SERIAL PRIMARY KEY,
+	first_name			NATIONAL CHARACTER VARYING,
+	last_name			NATIONAL CHARACTER VARYING,
 	father_name 		NATIONAL CHARACTER VARYING,
-    cur_province     NATIONAL CHARACTER VARYING,
-    cur_destric      NATIONAL CHARACTER VARYING,
-    cur_village      NATIONAL CHARACTER VARYING,
-    permanent_address NATIONAL CHARACTER VARYING,
+    cur_province     	NATIONAL CHARACTER VARYING,
+    cur_destric      	NATIONAL CHARACTER VARYING,
+    cur_village      	NATIONAL CHARACTER VARYING,
+    permanent_address 	NATIONAL CHARACTER VARYING,
     education_lavel 	NATIONAL CHARACTER VARYING,
-    join_date 		DATE,
-    dob 			DATE,
-    nid_number   	NATIONAL CHARACTER VARYING,
+    join_date 			DATE,
+    dob 				DATE,
+    nid_number   		NATIONAL CHARACTER VARYING,
     nid_page_number 	INT,
-    nid_reg_number    INT,
-    work_period  	NATIONAL CHARACTER VARYING,
-    personal_asset   NATIONAL CHARACTER VARYING,
-    family_asset     NATIONAL CHARACTER VARYING,
-    father_job       NATIONAL CHARACTER VARYING,
-    trips       	NATIONAL CHARACTER VARYING,
-    emp_image    	BYTEA,
-    relative_name    NATIONAL CHARACTER VARYING,
-    relative_father_name   NATIONAL CHARACTER VARYING,
-    relative_G_F_Name  	 NATIONAL CHARACTER VARYING,
-    relative_cur_address   NATIONAL CHARACTER VARYING,
-    relative_per_address   NATIONAL CHARACTER VARYING,
-    relative_job_title     NATIONAL CHARACTER VARYING,
-    relative_job_address   NATIONAL CHARACTER VARYING,
-	employee_type		 NATIONAL CHARACTER VARYING,
+    nid_reg_number    	INT,
+    work_period  		NATIONAL CHARACTER VARYING,
+    father_job       	NATIONAL CHARACTER VARYING,
+    emp_image    		BYTEA,
+	employee_type		NATIONAL CHARACTER VARYING,
     /** form sawanih Qalami */
-    grand_father 		 NATIONAL CHARACTER VARYING,
-    nationality 		 NATIONAL CHARACTER VARYING,
-    military_services     NATIONAL CHARACTER VARYING,
-    marital_status       NATIONAL CHARACTER VARYING,
+    grand_father 		NATIONAL CHARACTER VARYING,
+    nationality 		NATIONAL CHARACTER VARYING,
+    military_services   NATIONAL CHARACTER VARYING,
+    marital_status      NATIONAL CHARACTER VARYING,
     /* Sawanih Mamorin*/
-    before_jobs          NATIONAL CHARACTER VARYING,
-    health_reports       NATIONAL CHARACTER VARYING,
+    before_jobs         NATIONAL CHARACTER VARYING,
+    health_reports      NATIONAL CHARACTER VARYING,
 	attachment    		BYTEA
 	
 );
@@ -90,14 +81,29 @@ CREATE TABLE employees(
 CREATE TABLE emp_relatives(
 	/* Zawj or zawja Information*/
 	rel_id				SERIAL PRIMARY KEY,
-	rel_relation       NATIONAL CHARACTER VARYING,
+	rel_relation       	NATIONAL CHARACTER VARYING,
 	rel_first_name       NATIONAL CHARACTER VARYING,
     rel_last_name        NATIONAL CHARACTER VARYING,
     rel_nid_number       NATIONAL CHARACTER VARYING,
+	rel_father_name   	NATIONAL CHARACTER VARYING,
+    rel_G_F_Name  	 	NATIONAL CHARACTER VARYING,
     rel_job             NATIONAL CHARACTER VARYING,
     rel_job_address      NATIONAL CHARACTER VARYING,
+    rel_cur_address   	NATIONAL CHARACTER VARYING,
+    rel_per_address   	NATIONAL CHARACTER VARYING,
     emp_fk_id			SERIAL,
 	CONSTRAINT rel_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
+	ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+CREATE TABLE emp_trips(
+	/* Trips*/
+	trip_id				SERIAL PRIMARY KEY,
+	trip_date 			DATE,
+	trip_to	       		NATIONAL CHARACTER VARYING,
+	trip_description    NATIONAL CHARACTER VARYING,
+    emp_fk_id			SERIAL,
+	CONSTRAINT trip_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 )
 
@@ -244,3 +250,5 @@ CREATE TABLE evaluations(
 	REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
