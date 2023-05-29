@@ -58,7 +58,7 @@ CREATE TABLE employees(
     education_lavel 	NATIONAL CHARACTER VARYING,
     join_date 		DATE,
     dob 			DATE,
-    nid_number   	INT,
+    nid_number   	NATIONAL CHARACTER VARYING,
     nid_page_number 	INT,
     nid_reg_number    INT,
     work_period  	NATIONAL CHARACTER VARYING,
