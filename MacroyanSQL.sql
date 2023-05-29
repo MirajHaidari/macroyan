@@ -5,7 +5,7 @@ CREATE TABLE organizations (
 	organization_name 	NATIONAL CHARACTER VARYING,
     organization_description NATIONAL CHARACTER VARYING,
     organization_location     NATIONAL CHARACTER VARYING,
-	organization_logo	BYTEA
+	organization_logo	NATIONAL CHARACTER VARYING
 );
 
 CREATE TABLE  departments(
@@ -64,7 +64,7 @@ CREATE TABLE employees(
     nid_reg_number    	INT,
     work_period  		NATIONAL CHARACTER VARYING,
     father_job       	NATIONAL CHARACTER VARYING,
-    emp_image    		BYTEA,
+    emp_image    		NATIONAL CHARACTER VARYING,
 	employee_type		NATIONAL CHARACTER VARYING,
     /** form sawanih Qalami */
     grand_father 		NATIONAL CHARACTER VARYING,
@@ -74,7 +74,7 @@ CREATE TABLE employees(
     /* Sawanih Mamorin*/
     before_jobs         NATIONAL CHARACTER VARYING,
     health_reports      NATIONAL CHARACTER VARYING,
-	attachment    		BYTEA
+	attachment    		NATIONAL CHARACTER VARYING
 	
 );
 
@@ -139,7 +139,7 @@ CREATE TABLE guarantee_forms(
     orig_address    NATIONAL CHARACTER VARYING,
     nid    			NATIONAL CHARACTER VARYING,
     phone  			NATIONAL CHARACTER VARYING,
-    image  			BYTEA, 
+    image  			NATIONAL CHARACTER VARYING, 
 	emp_fk_id		SERIAL,
 	CONSTRAINT gu_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
@@ -152,7 +152,7 @@ CREATE TABLE recruitments(
 	position_fk_id		SERIAL,
 	position_title_fk		SERIAL,
     recuitment_remark    NATIONAL CHARACTER VARYING,
-    recuitment_attachment    BYTEA,
+    recuitment_attachment    NATIONAL CHARACTER VARYING,
 	CONSTRAINT pos_employe FOREIGN KEY(position_fk_id) 
 	REFERENCES positions (pos_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE,
