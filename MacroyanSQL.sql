@@ -74,22 +74,12 @@ CREATE TABLE employees(
     relative_job_title     NATIONAL CHARACTER VARYING,
     relative_job_address   NATIONAL CHARACTER VARYING,
 	employee_type		 NATIONAL CHARACTER VARYING,
-
     /** form sawanih Qalami */
     grand_father 		 NATIONAL CHARACTER VARYING,
     nationality 		 NATIONAL CHARACTER VARYING,
     military_services     NATIONAL CHARACTER VARYING,
-    education_address     NATIONAL CHARACTER VARYING,
-    gratuation_date      DATE,
-    otherLanguage_fk     INT,
-    language_status      NATIONAL CHARACTER VARYING,
     marital_status       NATIONAL CHARACTER VARYING,
-    /* Zawj or zawja Information*/
-    pair_first_name       NATIONAL CHARACTER VARYING,
-    pair_last_name        NATIONAL CHARACTER VARYING,
-    pair_nid_number       NATIONAL CHARACTER VARYING,
-    pair_job             NATIONAL CHARACTER VARYING,
-    pair_job_address      NATIONAL CHARACTER VARYING,
+   
     /* Sawanih Mamorin*/
     promotion           NATIONAL CHARACTER VARYING,
     promotion_date       DATE,
@@ -103,13 +93,40 @@ CREATE TABLE employees(
 	
 );
 
+CREATE TABLE emp_relatives(
+	/* Zawj or zawja Information*/
+	rel_id				SERIAL PRIMARY KEY,
+	rel_relation       NATIONAL CHARACTER VARYING,
+	rel_first_name       NATIONAL CHARACTER VARYING,
+    rel_last_name        NATIONAL CHARACTER VARYING,
+    rel_nid_number       NATIONAL CHARACTER VARYING,
+    rel_job             NATIONAL CHARACTER VARYING,
+    rel_job_address      NATIONAL CHARACTER VARYING,
+    emp_fk_id			SERIAL,
+	CONSTRAINT rel_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
+	ON DELETE CASCADE ON UPDATE CASCADE
+)
+
 CREATE TABLE language_skills(
-	lang_id			SERIAL PRIMARY KEY,
+	lang_id				SERIAL PRIMARY KEY,
 	language_name 		NATIONAL CHARACTER VARYING,
-    last_name   	NATIONAL CHARACTER VARYING,
-    father_name 	NATIONAL CHARACTER VARYING,
-    job_description NATIONAL CHARACTER VARYING,
-    curr_address    NATIONAL CHARACTER VARYING,
+    reading			   	NATIONAL CHARACTER VARYING,
+    written				NATIONAL CHARACTER VARYING,
+    speking		 		NATIONAL CHARACTER VARYING,
+    emp_fk_id			SERIAL,
+	CONSTRAINT lang_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
+	ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+CREATE TABLE assets(
+	asset_id				SERIAL PRIMARY KEY,
+	asset_name 				NATIONAL CHARACTER VARYING,
+    asset_type			   	NATIONAL CHARACTER VARYING,
+    asset_price				NATIONAL CHARACTER VARYING,
+    asset_description		NATIONAL CHARACTER VARYING,
+    emp_fk_id			SERIAL,
+	CONSTRAINT asset_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
+	ON DELETE CASCADE ON UPDATE CASCADE
 )
 
 CREATE TABLE guarantee_forms(
@@ -193,11 +210,15 @@ CREATE TABLE emp_ranks(
 
 CREATE TABLE emp_educations(
     /* Qadam*/
+	
 	edu_id			    SERIAL PRIMARY KEY,
-	emp_fk_id				SERIAL,
-    edu_level            NATIONAL CHARACTER VARYING,
-    edu_date      	    DATE,
-    edu_detailes  NATIONAL CHARACTER VARYING,
+	emp_fk_id			SERIAL,
+	center_name   		NATIONAL CHARACTER VARYING,
+    edu_level           NATIONAL CHARACTER VARYING,
+	edu_shift		    NATIONAL CHARACTER VARYING,
+	center_address   	NATIONAL CHARACTER VARYING,
+    start_date      	DATE,
+    end_date      	    DATE,
 	CONSTRAINT emp_edu FOREIGN KEY(emp_fk_id) 
 	REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
