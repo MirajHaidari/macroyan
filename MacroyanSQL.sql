@@ -236,7 +236,6 @@ CREATE TABLE sawanih(
 );
 
 
-
 CREATE TABLE evaluations(
 	evaluation_id		SERIAL PRIMARY KEY,
 	evaluation_date		DATE,
