@@ -72,7 +72,6 @@ CREATE TABLE employees(
     military_services   NATIONAL CHARACTER VARYING,
     marital_status      NATIONAL CHARACTER VARYING,
     /* Sawanih Mamorin*/
-    before_jobs         NATIONAL CHARACTER VARYING,
     health_reports      NATIONAL CHARACTER VARYING,
 	attachment    		NATIONAL CHARACTER VARYING
 	
