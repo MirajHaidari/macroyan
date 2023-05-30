@@ -9,18 +9,18 @@ CREATE TABLE organizations (
 );
 
 CREATE TABLE  departments(
-	dep_id	SERIAL PRIMARY KEY,
-    department_name  NATIONAL CHARACTER VARYING,
-    department_description    NATIONAL CHARACTER VARYING
+	dep_id				SERIAL PRIMARY KEY,
+    dep_name  			NATIONAL CHARACTER VARYING,
+    dep_description    	NATIONAL CHARACTER VARYING,
+	dep_acceptance_date		DATE
 );
 
 CREATE TABLE positions(
-	pos_id		SERIAL PRIMARY KEY,
-	department_fk_id 	SERIAL,
-	position_name 	NATIONAL CHARACTER VARYING,
-    position_desc    NATIONAL CHARACTER VARYING,
-    position_status    NATIONAL CHARACTER VARYING,
-	
+	pos_id				SERIAL PRIMARY KEY,				
+	department_fk_id 	SERIAL,				
+	position_name 		NATIONAL CHARACTER VARYING,
+    position_desc    	NATIONAL CHARACTER VARYING,
+    position_status    	NATIONAL CHARACTER VARYING,
 	CONSTRAINT pos_department FOREIGN KEY(department_fk_id) REFERENCES departments (dep_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -30,8 +30,10 @@ CREATE TABLE position_titles(
     position_title_id		SERIAL PRIMARY KEY,
     position_title_name   NATIONAL CHARACTER VARYING,
     position_title_desc   NATIONAL CHARACTER VARYING,
-	number_of_position	INT,
-	position_fk_id		SERIAL,
+    position__title_degree		  NATIONAL CHARACTER VARYING,
+    position_title_step		INT,
+	number_of_position	  	INT,
+	position_fk_id			SERIAL,
 	CONSTRAINT title_pos FOREIGN KEY(position_fk_id) REFERENCES positions (pos_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -66,7 +68,7 @@ CREATE TABLE employees(
     father_job       	NATIONAL CHARACTER VARYING,
     emp_image    		NATIONAL CHARACTER VARYING,
 	employee_type		NATIONAL CHARACTER VARYING,
-    /** form sawanih Qalami */
+    /* form sawanih Qalami */
     grand_father 		NATIONAL CHARACTER VARYING,
     nationality 		NATIONAL CHARACTER VARYING,
     military_services   NATIONAL CHARACTER VARYING,
@@ -93,7 +95,7 @@ CREATE TABLE emp_relatives(
     emp_fk_id			SERIAL,
 	CONSTRAINT rel_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 
 CREATE TABLE emp_experiance(
 	exp_id				SERIAL PRIMARY KEY,
@@ -105,7 +107,7 @@ CREATE TABLE emp_experiance(
     emp_fk_id			SERIAL,
 	CONSTRAINT exp_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 
 CREATE TABLE emp_trips(
 	/* Trips*/
@@ -116,7 +118,7 @@ CREATE TABLE emp_trips(
     emp_fk_id			SERIAL,
 	CONSTRAINT trip_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 
 CREATE TABLE language_skills(
 	lang_id				SERIAL PRIMARY KEY,
@@ -127,9 +129,9 @@ CREATE TABLE language_skills(
     emp_fk_id			SERIAL,
 	CONSTRAINT lang_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 
-CREATE TABLE assets(
+CREATE TABLE emp_assets(
 	asset_id				SERIAL PRIMARY KEY,
 	asset_name 				NATIONAL CHARACTER VARYING,
     asset_type			   	NATIONAL CHARACTER VARYING,
@@ -138,7 +140,7 @@ CREATE TABLE assets(
     emp_fk_id			SERIAL,
 	CONSTRAINT asset_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 
 CREATE TABLE guarantee_forms(
 	gua_id			SERIAL PRIMARY KEY,
@@ -156,16 +158,15 @@ CREATE TABLE guarantee_forms(
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE recruitments(
-	rec_id		SERIAL PRIMARY KEY,
+CREATE TABLE emp_contructs(
+	contract_id				SERIAL PRIMARY KEY,
 	emp_fk_id				SERIAL,
-    recuitment_date      DATE,
-	position_fk_id		SERIAL,
+    contract_start_date   	DATE,
+    contract_end_date     	DATE,
 	position_title_fk		SERIAL,
-    recuitment_remark    NATIONAL CHARACTER VARYING,
-    recuitment_attachment    NATIONAL CHARACTER VARYING,
-	CONSTRAINT pos_employe FOREIGN KEY(position_fk_id) 
-	REFERENCES positions (pos_id)    
+    contract_attachment    NATIONAL CHARACTER VARYING,
+	CONSTRAINT pos_title_employe FOREIGN KEY(position_title_fk) 
+	REFERENCES position_titles (position_title_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT rec_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
@@ -261,5 +262,3 @@ CREATE TABLE evaluations(
 	REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-
