@@ -36,7 +36,7 @@ CREATE TABLE position_titles(
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE job_respons(
+CREATE TABLE job_responsibilities(
 	resp_id		SERIAL PRIMARY KEY,
 	resp_desc	NATIONAL CHARACTER VARYING,
 	pos_title_fk_id	SERIAL,
