@@ -55,14 +55,14 @@ CREATE TABLE employees(
     cur_province     	NATIONAL CHARACTER VARYING,
     cur_destric      	NATIONAL CHARACTER VARYING,
     cur_village      	NATIONAL CHARACTER VARYING,
-    permanent_address 	NATIONAL CHARACTER VARYING,
+    per_province     	NATIONAL CHARACTER VARYING,
+    per_destric      	NATIONAL CHARACTER VARYING,
+    per_village      	NATIONAL CHARACTER VARYING,
     education_lavel 	NATIONAL CHARACTER VARYING,
-    join_date 			DATE,
     dob 				DATE,
     nid_number   		NATIONAL CHARACTER VARYING,
     nid_page_number 	INT,
-    nid_reg_number    	INT,
-    work_period  		NATIONAL CHARACTER VARYING,
+    nid_reg_number    	INT, 
     father_job       	NATIONAL CHARACTER VARYING,
     emp_image    		NATIONAL CHARACTER VARYING,
 	employee_type		NATIONAL CHARACTER VARYING,
@@ -93,6 +93,18 @@ CREATE TABLE emp_relatives(
     rel_per_address   	NATIONAL CHARACTER VARYING,
     emp_fk_id			SERIAL,
 	CONSTRAINT rel_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
+	ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+CREATE TABLE emp_experiance(
+	exp_id				SERIAL PRIMARY KEY,
+	org_name 			NATIONAL CHARACTER VARYING,
+    org_job_title		NATIONAL CHARACTER VARYING,
+	org_address			NATIONAL CHARACTER VARYING,
+	start_date 			DATE,
+	end_date 			DATE,
+    emp_fk_id			SERIAL,
+	CONSTRAINT exp_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 )
 
