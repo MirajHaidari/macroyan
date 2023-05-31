@@ -123,10 +123,11 @@ CREATE TABLE emp_trips(
 CREATE TABLE language_skills(
 	lang_id				SERIAL PRIMARY KEY,
 	language_name 		NATIONAL CHARACTER VARYING,
-    reading			   	NATIONAL CHARACTER VARYING,
-    written				NATIONAL CHARACTER VARYING,
-    speking		 		NATIONAL CHARACTER VARYING,
-    emp_fk_id			SERIAL,
+    	reading			   	NATIONAL CHARACTER VARYING,
+    	writing				NATIONAL CHARACTER VARYING,
+    	speking		 		NATIONAL CHARACTER VARYING,
+	listening		 	NATIONAL CHARACTER VARYING,
+    	emp_fk_id			SERIAL,
 	CONSTRAINT lang_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
