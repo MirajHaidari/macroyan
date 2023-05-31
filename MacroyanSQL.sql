@@ -1,3 +1,4 @@
+
 CREATE DATABASE MacroyanMIS;
 
 CREATE TABLE organizations (
@@ -30,7 +31,7 @@ CREATE TABLE position_titles(
     position_title_id		SERIAL PRIMARY KEY,
     position_title_name   NATIONAL CHARACTER VARYING,
     position_title_desc   NATIONAL CHARACTER VARYING,
-    position__title_degree		  NATIONAL CHARACTER VARYING,
+    position_title_degree		  NATIONAL CHARACTER VARYING,
     position_title_step		INT,
 	number_of_position	  	INT,
 	position_fk_id			SERIAL,
@@ -67,7 +68,6 @@ CREATE TABLE employees(
     nid_reg_number    	INT, 
     father_job       	NATIONAL CHARACTER VARYING,
     emp_image    		NATIONAL CHARACTER VARYING,
-	employee_type		NATIONAL CHARACTER VARYING,
     /* form sawanih Qalami */
     grand_father 		NATIONAL CHARACTER VARYING,
     nationality 		NATIONAL CHARACTER VARYING,
@@ -123,11 +123,11 @@ CREATE TABLE emp_trips(
 CREATE TABLE language_skills(
 	lang_id				SERIAL PRIMARY KEY,
 	language_name 		NATIONAL CHARACTER VARYING,
-    	reading			   	NATIONAL CHARACTER VARYING,
-    	writing				NATIONAL CHARACTER VARYING,
-    	speking		 		NATIONAL CHARACTER VARYING,
-	listening		 	NATIONAL CHARACTER VARYING,
-    	emp_fk_id			SERIAL,
+    reading			   	NATIONAL CHARACTER VARYING,
+    writing				NATIONAL CHARACTER VARYING,
+    speking		 		NATIONAL CHARACTER VARYING,
+    listening		 	NATIONAL CHARACTER VARYING,
+    emp_fk_id			SERIAL,
 	CONSTRAINT lang_employee FOREIGN KEY (emp_fk_id) REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -165,7 +165,9 @@ CREATE TABLE emp_contructs(
     contract_start_date   	DATE,
     contract_end_date     	DATE,
 	position_title_fk		SERIAL,
-    contract_attachment    NATIONAL CHARACTER VARYING,
+	employee_type			NATIONAL CHARACTER VARYING,
+    contract_attachment    	NATIONAL CHARACTER VARYING,
+	emp_salary				FLOAT,
 	CONSTRAINT pos_title_employe FOREIGN KEY(position_title_fk) 
 	REFERENCES position_titles (position_title_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE,
@@ -263,3 +265,6 @@ CREATE TABLE evaluations(
 	REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
+
