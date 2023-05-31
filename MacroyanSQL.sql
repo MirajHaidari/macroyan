@@ -185,13 +185,13 @@ CREATE TABLE rewards(
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE majazats(
+CREATE TABLE punishments(
     /* Majazat*/
-	panishment_id		SERIAL PRIMARY KEY,
-	emp_fk_id				SERIAL,
-    panishment          NATIONAL CHARACTER VARYING,
-    panishment_date      DATE,
-    panishment_detailes  NATIONAL CHARACTER VARYING,
+	punishment_id		SERIAL PRIMARY KEY,
+	emp_fk_id			SERIAL,
+    punishment_name     NATIONAL CHARACTER VARYING,
+    punishment_date      DATE,
+    punishment_detailes  NATIONAL CHARACTER VARYING,
 	CONSTRAINT emp_majazat FOREIGN KEY(emp_fk_id) 
 	REFERENCES employees (emp_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
