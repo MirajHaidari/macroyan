@@ -9,6 +9,7 @@ CREATE TABLE organizations (
 	organization_logo	NATIONAL CHARACTER VARYING
 );
 
+
 CREATE TABLE  departments(
 	dep_id				SERIAL PRIMARY KEY,
     dep_name  			NATIONAL CHARACTER VARYING,
