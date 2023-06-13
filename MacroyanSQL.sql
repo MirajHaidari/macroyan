@@ -9,18 +9,17 @@ CREATE TABLE organizations (
 	organization_logo	NATIONAL CHARACTER VARYING
 );
 
-
 CREATE TABLE directorates(
 	dir_id				SERIAL PRIMARY KEY,	
 	dir_name			NATIONAL CHARACTER VARYING,
-	dir_description		NATIONAL CHARACTER VARYING
+	dir_description		NATIONAL CHARACTER VARYING,
+	dir_acceptance_date		DATE
 );
 
 CREATE TABLE  departments(
 	dep_id				SERIAL PRIMARY KEY,
     dep_name  			NATIONAL CHARACTER VARYING,
     dep_description    	NATIONAL CHARACTER VARYING,
-	dep_acceptance_date		DATE,
 	dir_fk_id			SERIAL,
 	CONSTRAINT dep_directorate FOREIGN KEY(dir_fk_id) REFERENCES directorates (dir_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE
@@ -50,8 +49,8 @@ CREATE TABLE position_titles(
 );
 
 CREATE TABLE job_responsibilities(
-	resp_id		SERIAL PRIMARY KEY,
-	resp_desc	NATIONAL CHARACTER VARYING,
+	resp_id			SERIAL PRIMARY KEY,
+	resp_desc		NATIONAL CHARACTER VARYING,
 	pos_title_fk_id	SERIAL,
 	CONSTRAINT resp_posit_title FOREIGN KEY(pos_title_fk_id) 
 	REFERENCES position_titles (position_title_id)    
@@ -65,14 +64,17 @@ CREATE TABLE employees(
 	first_name			NATIONAL CHARACTER VARYING,
 	last_name			NATIONAL CHARACTER VARYING,
 	father_name 		NATIONAL CHARACTER VARYING,
+	gender 				NATIONAL CHARACTER VARYING,
 	phone_number		NATIONAL CHARACTER VARYING,
 	email_address		NATIONAL CHARACTER VARYING,
     cur_province     	NATIONAL CHARACTER VARYING,
     cur_destric      	NATIONAL CHARACTER VARYING,
     cur_village      	NATIONAL CHARACTER VARYING,
+    cur_house_num      	NATIONAL CHARACTER VARYING,
     per_province     	NATIONAL CHARACTER VARYING,
     per_destric      	NATIONAL CHARACTER VARYING,
     per_village      	NATIONAL CHARACTER VARYING,
+	per_house_num      	NATIONAL CHARACTER VARYING,
     education_lavel 	NATIONAL CHARACTER VARYING,
     dob 				DATE,
     nid_number   		NATIONAL CHARACTER VARYING,
@@ -99,7 +101,7 @@ CREATE TABLE emp_relatives(
     rel_last_name        NATIONAL CHARACTER VARYING,
     rel_nid_number       NATIONAL CHARACTER VARYING,
 	rel_father_name   	NATIONAL CHARACTER VARYING,
-    rel_G_F_Name  	 	NATIONAL CHARACTER VARYING,
+    rel_g_f_name  	 	NATIONAL CHARACTER VARYING,
     rel_job             NATIONAL CHARACTER VARYING,
     rel_job_address      NATIONAL CHARACTER VARYING,
     rel_cur_address   	NATIONAL CHARACTER VARYING,
@@ -180,6 +182,7 @@ CREATE TABLE emp_contructs(
 	employee_type			NATIONAL CHARACTER VARYING,
     contract_attachment    	NATIONAL CHARACTER VARYING,
 	emp_salary				FLOAT,
+	contract_status			NATIONAL CHARACTER VARYING,
 	CONSTRAINT pos_title_employe FOREIGN KEY(position_title_fk) 
 	REFERENCES position_titles (position_title_id)    
 	ON DELETE CASCADE ON UPDATE CASCADE,
@@ -237,7 +240,6 @@ CREATE TABLE emp_ranks(
 
 CREATE TABLE emp_educations(
     /* Qadam*/
-	
 	edu_id			    SERIAL PRIMARY KEY,
 	emp_fk_id			SERIAL,
 	center_name   		NATIONAL CHARACTER VARYING,
@@ -266,9 +268,9 @@ CREATE TABLE sawanih(
 CREATE TABLE evaluations(
 	evaluation_id		SERIAL PRIMARY KEY,
 	evaluation_date		DATE,
-	emp_fk_id				SERIAL,
+	emp_fk_id			SERIAL,
 	self_mark			FLOAT,
-	supervoisor_mark		FLOAT,
+	supervoisor_mark	FLOAT,
 	supervisor_remark	NATIONAL CHARACTER VARYING,
 	boss_mark			FLOAT,
 	boss_remark			NATIONAL CHARACTER VARYING,
