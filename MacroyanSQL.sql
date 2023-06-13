@@ -9,11 +9,21 @@ CREATE TABLE organizations (
 	organization_logo	NATIONAL CHARACTER VARYING
 );
 
+
+CREATE TABLE directorates(
+	dir_id				SERIAL PRIMARY KEY,	
+	dir_name			NATIONAL CHARACTER VARYING,
+	dir_description		NATIONAL CHARACTER VARYING
+);
+
 CREATE TABLE  departments(
 	dep_id				SERIAL PRIMARY KEY,
     dep_name  			NATIONAL CHARACTER VARYING,
     dep_description    	NATIONAL CHARACTER VARYING,
-	dep_acceptance_date		DATE
+	dep_acceptance_date		DATE,
+	dir_fk_id			SERIAL,
+	CONSTRAINT dep_directorate FOREIGN KEY(dir_fk_id) REFERENCES directorates (dir_id)    
+	ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE positions(
